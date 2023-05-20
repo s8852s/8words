@@ -1,0 +1,244 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+  </head>
+  <body>
+  <div class="container">
+    <table class="table table-bordered text-center" id="mingpan">
+      <thead>
+        <tr>
+          <th scope="col">姓名</th>
+          <td style="" scope="" colspan="2" id="name"><%= @user.name %></td>
+          <th scope="col">性別</th>
+          <td scope="col" id="gender"><%= @user.gender %></td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td id="solar-time"><%= translate_birthday(@user.solar_birthday)[:time] %></td>
+          <td id="solar-day"><%= translate_birthday(@user.solar_birthday)[:day] %></td>
+          <td id="solar-month"><%= translate_birthday(@user.solar_birthday)[:month] %></td>
+          <td id="solar-year"><%= translate_birthday(@user.solar_birthday)[:year] %></td>
+          <th>國曆</th>
+        </tr>
+        <tr>
+          <td id="lunar-time"><%= translate_birthday(@user.lunar_birthday)[:time] %></td>
+          <td id="lunar-day"><%= translate_birthday(@user.lunar_birthday)[:day] %></td>
+          <td id="lunar-month"><%= translate_birthday(@user.lunar_birthday)[:month] %></td>
+          <td id="lunar-year"><%= translate_birthday(@user.lunar_birthday)[:year] %></td>
+          <th>農曆</th>
+        </tr>
+        <tr>
+          <td class="self-shishen" id="shishen-time-gan"><%= translate_shishen(@user.day_gan, @user.time_gan) %></td>
+          <td class="self-shishen" id="riyuan">日元</td>
+          <td class="self-shishen" id="shishen-month-gan"><%= translate_shishen(@user.day_gan, @user.month_gan) %></td>
+          <td class="self-shishen" id="shishen-year-gan"><%= translate_shishen(@user.day_gan, @user.year_gan) %></td>
+          <th>主星</th>
+        </tr>
+        <tr>
+          <td class="self-gan self-gan-3" id="bazi-time-gan">
+            <%= @user.time_gan %>
+            <p><%= show_wuxing(@user.time_gan) %></p>
+          </td>
+          <td class="self-gan self-gan-2" id="bazi-day-gan">
+            <%= @user.day_gan %>
+            <p><%= show_wuxing(@user.day_gan) %></p>
+          </td>
+          <td class="self-gan self-gan-1" id="bazi-month-gan">
+            <%= @user.month_gan %>
+            <p><%= show_wuxing(@user.month_gan) %></p>
+          </td>
+          <td class="self-gan self-gan-0" id="bazi-year-gan">
+            <%= @user.year_gan %>
+            <p><%= show_wuxing(@user.year_gan) %></p>
+          </td>
+          <th>天干</th>
+        </tr>
+        <tr>
+          <td class="self-zhi self-zhi-3" id="bazi-time-zhi">
+            <%= @user.time_zhi %>
+            <p><%= show_wuxing(@user.time_zhi) %></p>
+          </td>
+          <td class="self-zhi self-zhi-2" id="bazi-day-zhi">
+            <%= @user.day_zhi %>
+            <p><%= show_wuxing(@user.day_zhi) %></p>
+          </td>
+          <td class="self-zhi self-zhi-1" id="bazi-month-zhi">
+            <%= @user.month_zhi %>
+            <p><%= show_wuxing(@user.month_zhi) %></p>
+          </td>
+          <td class="self-zhi self-zhi-0" id="bazi-year-zhi">
+            <%= @user.year_zhi %>
+            <p><%= show_wuxing(@user.year_zhi) %></p>
+          </td>
+          <th>地支</th>
+        </tr>
+        <tr>
+          <td class="self-shishen" id="shishen-time-zhi"><%= translate_shishen(@user.day_gan, @user.time_zhi) %></td>
+          <td class="self-shishen" id="shishen-day-zhi"><%= translate_shishen(@user.day_gan, @user.day_zhi) %></td>
+          <td class="self-shishen" id="shishen-month-zhi"><%= translate_shishen(@user.day_gan, @user.month_zhi) %></td>
+          <td class="self-shishen" id="shishen-year-zhi"><%= translate_shishen(@user.day_gan, @user.year_zhi) %></td>
+          <th>主星</th>
+        </tr>
+        <tr>
+          <td><%= changzhi(@user.time_zhi) %></td>
+          <td><%= changzhi(@user.day_zhi) %></td>
+          <td><%= changzhi(@user.month_zhi) %></td>
+          <td><%= changzhi(@user.year_zhi) %></td>
+          <th>藏支</th>
+        </tr>
+        <tr>
+          <td id="shishen-time-fuxing">
+            <% changzhi_shishen(@user.time_zhi, @user.day_gan).each do |shishen| %>
+              <div><%= shishen %></div>
+            <% end %>
+          </td>
+          <td id="shishen-day-fuxing">
+            <% changzhi_shishen(@user.day_zhi, @user.day_gan).each do |shishen| %>
+              <div><%= shishen %></div>
+            <% end %>
+          </td>
+          <td id="shishen-month-fuxing">
+            <% changzhi_shishen(@user.month_zhi, @user.day_gan).each do |shishen| %>
+              <div><%= shishen %></div>
+            <% end %>
+          </td>
+          <td id="shishen-year-fuxing">
+            <% changzhi_shishen(@user.year_zhi, @user.day_gan).each do |shishen| %>
+              <div><%= shishen %></div>
+            <% end %>
+          </td>
+          <th>副星</th>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="table table-bordered text-center table-striped-columns" id="liunian" >
+      <tbody>
+        <tr>
+          <% liunian_age(@user)[0].reverse.each do |age| %>
+            <td scope="col" class="age"><%= age %></td>
+          <% end %>
+        </tr>
+        <tr>
+          <% show_liunian_age(@user)[0].reverse.each do |age| %>
+          
+            <td scope="col" style="writing-mode: vertical-rl;text-align: center;"><%= age %></td>
+          <% end %>
+        </tr>
+        <tr>
+          <% liunian_age(@user)[1].reverse.each do |age| %>
+            <td scope="col" class="age"><%= age %></td>
+          <% end %>
+        </tr>
+        <tr>
+          <% show_liunian_age(@user)[1].reverse.each do |age| %>
+            <td scope="col" style="writing-mode: vertical-rl;text-align: center;"><%= age %></td>
+          <% end %>
+        </tr>
+        <tr>
+          <% liunian_age(@user)[2].reverse.each do |age| %>
+            <td scope="col" class="age"><%= age %></td>
+          <% end %>
+        </tr>
+        <tr>
+          <% show_liunian_age(@user)[2].reverse.each do |age| %>
+            <td scope="col" style="writing-mode: vertical-rl;text-align: center;"><%= age %></td>
+          <% end %>
+        </tr>
+        <tr>
+          <% liunian_age(@user)[3].reverse.each do |age| %>
+            <td scope="col" class="age"><%= age %></td>
+          <% end %>
+        </tr>
+        <tr>
+          <% show_liunian_age(@user)[3].reverse.each do |age| %>
+            <td scope="col" style="writing-mode: vertical-rl;text-align: center;"><%= age %></td>
+          <% end %>
+        </tr>
+        <tr>
+          <% liunian_age(@user)[4].reverse.each do |age| %>
+            <td scope="col" class="age"><%= age %></td>
+          <% end %>
+        </tr>
+        <tr>
+          <% show_liunian_age(@user)[4].reverse.each do |age| %>
+            <td scope="col" style="writing-mode: vertical-rl;text-align: center;"><%= age %></td>
+          <% end %>
+        </tr>
+        <tr>
+          <% liunian_age(@user)[5].reverse.each do |age| %>
+            <td scope="col" class="age"><%= age %></td>
+          <% end %>
+        </tr>
+        <tr>
+          <% show_liunian_age(@user)[5].reverse.each do |age| %>
+            <td scope="col" style="writing-mode: vertical-rl;text-align: center;"><%= age %></td>
+          <% end %>
+        </tr>
+      </tbody>
+    </table>
+    <table class="table table-bordered text-center" id="dayun">
+      <tbody>
+        <tr>
+          <% dayun_age(@user.qiyun)[:dayun_age_gan].reverse.each do |age| %>
+            <td scope="col"><%= age %></td>
+          <% end %>
+        </tr>
+        <tr>
+          <% show_dayun_shishen(@user.dayun, @user.day_gan)[:dayun_shishen_gan].reverse.each do |shishen_gan| %>
+            <td scope="col"><%= shishen_gan %></td>
+          <% end %>
+        </tr>
+        <tr>
+          <% show_dayun(@user.dayun)[:dayun_gan].each_with_index.reverse_each do |gan, index| %>
+            <td scope="col" class="dayun-gan dayun_gan_<%= index %>"><%= gan %></td>
+          <% end %>
+        </tr>
+        <tr>
+          <% show_dayun(@user.dayun)[:dayun_zhi].each_with_index.reverse_each do |zhi, index| %>
+            <td scope="col" class="dayun-zhi dayun_zhi_<%= index %>"><%= zhi %></td>
+          <% end %>
+        </tr>
+        <tr>
+          <% show_dayun_shishen(@user.dayun, @user.day_gan)[:dayun_shishen_zhi].reverse.each do |shishen_zhi| %>
+            <td scope="col"><%= shishen_zhi %></td>
+          <% end %>
+        </tr>
+        <tr>
+          <% dayun_age(@user.qiyun)[:dayun_age_zhi].reverse.each do |age| %>
+            <td scope="col"><%= age %></td>
+          <% end %>
+        </tr>
+      </table>
+    </tbody>
+    <div class="field" id="information">
+      <div>空亡：<%= @user.xunkong %></div>
+      <div>強弱：<%= @user.qiangruo %></div>
+      <div>喜神：<%= @user.xishen %></div>
+      <div>忌神：<%= @user.jishen %></div>
+      <div>閒神：<%= @user.xianshen %></div>
+      <div>備註：<%= @user.notes&.html_safe %></div>
+    </div>
+
+  </div>
+    <div class="field" id="information-form">
+      <%= form_for @user, method: 'put' do |form| %>
+        <%= form.label :qiangruo, '強弱' %>
+        <%= form.text_field :qiangruo %>
+        <%= form.label :xishen, '喜神' %>
+        <%= form.text_field :xishen %>
+        <%= form.label :jishen, '忌神' %>
+        <%= form.text_field :jishen %>
+        <%= form.label :xianshen, '閒神' %>
+        <%= form.text_field :xianshen %>
+        <%= form.label :notes %>
+        <%= form.rich_text_area :notes %>
+        <%= form.submit "送出", class: 'submit-btn' %>
+      <% end %>
+    </div>
+
+    <script>
+    </script>
+  </body>
+</html>

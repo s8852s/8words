@@ -1,0 +1,159 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+  </head>
+  <body>
+    <%= form_for @user, method: 'post' do |form| %>
+      <div>
+        <%= form.label :name, "姓名:" %>
+        <%= form.text_field :name %>
+      </div>
+      <div>
+        <%= form.label :name, "年:" %>
+        <%= form.text_field :year %>
+      </div>
+      <div>
+        <%= form.label :name, "月:" %>
+        <%= form.text_field :month %>
+      </div>
+      <div>
+        <%= form.label :name, "日:" %>
+        <%= form.text_field :day %>
+      </div>
+      <div>
+        <%= form.label :name, "時:" %>
+        <%= form.text_field :hour %>
+      </div>
+      <div>
+        <%= form.label :name, "分:" %>
+        <%= form.text_field :minute %>
+      </div>
+
+      <div>
+        <%= form.label :gender, "性別:" %>
+        <%= form.label :gender, "男" %>
+        <%= form.radio_button :gender, 1, value: 1 %>
+        <%= form.label :gender, "女" %>
+        <%= form.radio_button :gender, 0, value: 0  %>
+      </div>
+      <div>
+        <%= form.submit "送出", class: 'submit-btn' %>
+      </div>
+    
+    <h6>隱藏欄位</h6>
+
+      <div>
+        <%= form.label :solar_birthday, "國曆生日:" %>
+        <%= form.text_field :solar_birthday, class: "solar_birthday" %>
+      </div>
+      <div>
+        <%= form.label :lunar_birthday, "農曆生日:" %>
+        <%= form.text_field :lunar_birthday, class: "lunar_birthday" %>
+      </div>
+      <div>
+        <%= form.label :year_gan, "年干:" %>
+        <%= form.text_field :year_gan, class: "year_gan" %>
+        <%= form.label :year_zhi, "年支:" %>
+        <%= form.text_field :year_zhi, class: "year_zhi" %>
+        <%= form.label :month_gan, "月干:" %>
+        <%= form.text_field :month_gan, class: "month_gan" %>
+        <%= form.label :month_zhi, "月支:" %>
+        <%= form.text_field :month_zhi, class: "month_zhi" %>
+        <%= form.label :day_gan, "日干:" %>
+        <%= form.text_field :day_gan, class: "day_gan" %>
+        <%= form.label :day_zhi, "日支:" %>
+        <%= form.text_field :day_zhi, class: "day_zhi" %>
+        <%= form.label :time_gan, "時干:" %>
+        <%= form.text_field :time_gan, class: "time_gan" %>
+        <%= form.label :time_zhi, "時支:" %>
+        <%= form.text_field :time_zhi, class: "time_zhi" %>
+      </div>
+      <div>
+        <%= form.label :qiyun, "起運:" %>
+        <%= form.text_field :qiyun, class: "qiyun" %>
+      </div>
+      <div>
+        <%= form.label :dayun, "大運:" %>
+        <%= form.text_field :dayun, class: "dayun" %>
+      </div>
+      <div>
+        <%= form.label :xunkong, "空亡:" %>
+        <%= form.text_field :xunkong, class: "xunkong" %>
+      </div>
+    <% end %>
+
+  <table>
+    <caption>Statement Summary</caption>
+    <thead>
+      <tr>
+        <td scope="col">姓名</td>
+        <td scope="" colspan="2" id="name"></td>
+        <td scope="col">性別</td>
+        <td scope="col" id="gender"></td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td id="solar-time"></td>
+        <td id="solar-day"></td>
+        <td id="solar-month"></td>
+        <td id="solar-year"></td>
+        <td>國曆</td>
+      </tr>
+      <tr>
+        <td id="lunar-time"></td>
+        <td id="lunar-day"></td>
+        <td id="lunar-month"></td>
+        <td id="lunar-year"></td>
+        <td>農曆</td>
+      </tr>
+      <tr>
+        <td id="shishen-time-gen"></td>
+        <td id="riyuan">日元</td>
+        <td id="shishen-month-gen"></td>
+        <td id="shishen-year-gen"></td>
+        <td>主星</td>
+      </tr>
+      <tr>
+        <td id="bazi-time-gen"></td>
+        <td id="bazi-day-gen"></td>
+        <td id="bazi-month-gen"></td>
+        <td id="bazi-year-gen"></td>
+        <td>天干</td>
+      </tr>
+      <tr>
+        <td id="bazi-time-zhi"></td>
+        <td id="bazi-day-zhi"></td>
+        <td id="bazi-month-zhi"></td>
+        <td id="bazi-year-zhi"></td>
+        <td>地支</td>
+      </tr>
+      <tr>
+        <td id="shishen-time-zhi"></td>
+        <td id="shishen-day-zhi"></td>
+        <td id="shishen-month-zhi"></td>
+        <td id="shishen-year-zhi"></td>
+        <td>主星</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>藏干</td>
+      </tr>
+      <tr>
+        <td id="shishen-time-fuxing"></td>
+        <td id="shishen-day-fuxing"></td>
+        <td id="shishen-month-fuxing"></td>
+        <td id="shishen-year-fuxing"></td>
+        <td>副星</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <script>
+    
+    </script>
+  </body>
+</html>
