@@ -4,7 +4,7 @@
   </head>
   <body>
   <div class="container">
-    <table class="table table-bordered text-center" id="mingpan">
+    <table class="table table-bordered text-center" id="mingpan-table">
       <thead>
         <tr>
           <th scope="col">姓名</th>
@@ -113,101 +113,224 @@
       </tbody>
     </table>
 
-    <table class="table table-bordered text-center table-striped-columns" id="liunian" >
+    <table class="table table-bordered border-dark text-center align-middle" id="liunian-table" >
       <tbody>
-        <tr>
+        <% if @mode == 'show_liunian_shishen' %>
+          <tr>
+            <% @user.dayun[0].chars.reverse.each do |dayun| %>
+              <td scope="col" colspan="5" class="show_liunian_dayun" style="text-align: center;"><%= dayun %></td>
+            <% end %>
+          </tr>
+        <% end %>
+        <tr clsee="table-active">
           <% liunian_age(@user)[0].reverse.each do |age| %>
             <td scope="col" class="age"><%= age %></td>
           <% end %>
         </tr>
         <tr>
-          <% show_liunian_age(@user)[0].reverse.each do |age| %>
-          
-            <td scope="col" style="writing-mode: vertical-rl;text-align: center;"><%= age %></td>
+          <% eval("#{@year}(@user)")[0].reverse.each do |xi_yuan| %>
+            <td scope="col" class="<%= @year %>" style="text-align: center;"><%= xi_yuan %></td>
           <% end %>
         </tr>
+        <% if @mode == 'show_liunian_shishen' %>
+          <tr>
+            <% eval("#{@mode}(@user)")[:liunian_shishen_gan][0].reverse.each do |mode| %>
+              <td scope="col" class="<%= @mode %> liunian_shishen_gan" style="text-align: center;"><%= mode %></td>
+            <% end %>
+          </tr>
+        <% end %>
+
+        <% if @mode == 'show_liunian_shishen' %>
+          <tr>
+            <% eval("#{@mode}(@user)")[:liunian_shishen_zhi][1].reverse.each do |mode| %>
+              <td scope="col" class="<%= @mode %>" style="text-align: center;"><%= mode %></td>
+            <% end %>
+          </tr>
+        <% end %>
         <tr>
+          <% show_liunian(@user)[0].reverse.each do |age| %>
+            <td scope="col" class="liunian" style="writing-mode: vertical-rl;text-align: center;"><%= age %></td>
+          <% end %>
+        </tr>
+        <% if @mode == 'show_liunian_shishen' %>
+          <tr>
+            <% eval("#{@mode}(@user)")[:liunian_shishen_zhi][0].reverse.each do |mode| %>
+              <td scope="col" class="<%= @mode %>" style="text-align: center;"><%= mode %></td>
+            <% end %>
+          </tr>
+          <tr>
+            <% @user.dayun[1].chars.reverse.each do |dayun| %>
+              <td scope="col" colspan="5" class="show_liunian_dayun" style="text-align: center;"><%= dayun %></td>
+            <% end %>
+          </tr>
+        <% end %>
+        <tr clsee="table-active">
           <% liunian_age(@user)[1].reverse.each do |age| %>
             <td scope="col" class="age"><%= age %></td>
           <% end %>
         </tr>
         <tr>
-          <% show_liunian_age(@user)[1].reverse.each do |age| %>
-            <td scope="col" style="writing-mode: vertical-rl;text-align: center;"><%= age %></td>
+          <% eval("#{@year}(@user)")[1].reverse.each do |xi_yuan| %>
+            <td scope="col" class="<%= @year %>" style="text-align: center;"><%= xi_yuan %></td>
           <% end %>
         </tr>
         <tr>
+          <% show_liunian(@user)[1].reverse.each do |age| %>
+            <td scope="col" class="liunian" style="writing-mode: vertical-rl;text-align: center;"><%= age %></td>
+          <% end %>
+        </tr>
+        <% if @mode == 'show_liunian_shishen' %>
+          <tr>
+            <% eval("#{@mode}(@user)")[:liunian_shishen_zhi][1].reverse.each do |mode| %>
+              <td scope="col" class="<%= @mode %>" style="text-align: center;"><%= mode %></td>
+            <% end %>
+          </tr>
+          <tr>
+            <% @user.dayun[2].chars.reverse.each do |dayun| %>
+              <td scope="col" colspan="5" class="show_liunian_dayun" style="text-align: center;"><%= dayun %></td>
+            <% end %>
+          </tr>
+        <% end %>
+        <tr clsee="table-active">
           <% liunian_age(@user)[2].reverse.each do |age| %>
             <td scope="col" class="age"><%= age %></td>
           <% end %>
         </tr>
-        <tr>
-          <% show_liunian_age(@user)[2].reverse.each do |age| %>
-            <td scope="col" style="writing-mode: vertical-rl;text-align: center;"><%= age %></td>
+          <tr>
+          <% eval("#{@year}(@user)")[2].reverse.each do |xi_yuan| %>
+            <td scope="col" class="<%= @year %>" style="text-align: center;"><%= xi_yuan %></td>
           <% end %>
         </tr>
         <tr>
+          <% show_liunian(@user)[2].reverse.each do |age| %>
+            <td scope="col" class="liunian" style="writing-mode: vertical-rl;text-align: center;"><%= age %></td>
+          <% end %>
+        </tr>
+        <% if @mode == 'show_liunian_shishen' %>
+          <tr>
+            <% eval("#{@mode}(@user)")[:liunian_shishen_zhi][2].reverse.each do |mode| %>
+              <td scope="col" class="<%= @mode %>" style="text-align: center;"><%= mode %></td>
+            <% end %>
+          </tr>
+          <tr>
+            <% @user.dayun[3].chars.reverse.each do |dayun| %>
+              <td scope="col" colspan="5" class="show_liunian_dayun" style="text-align: center;"><%= dayun %></td>
+            <% end %>
+          </tr>
+        <% end %>
+        <tr clsee="table-active">
           <% liunian_age(@user)[3].reverse.each do |age| %>
             <td scope="col" class="age"><%= age %></td>
           <% end %>
         </tr>
         <tr>
-          <% show_liunian_age(@user)[3].reverse.each do |age| %>
-            <td scope="col" style="writing-mode: vertical-rl;text-align: center;"><%= age %></td>
+          <% eval("#{@year}(@user)")[3].reverse.each do |xi_yuan| %>
+            <td scope="col" class="<%= @year %>" style="text-align: center;"><%= xi_yuan %></td>
           <% end %>
         </tr>
         <tr>
+          <% show_liunian(@user)[3].reverse.each do |age| %>
+            <td scope="col" class="liunian" style="writing-mode: vertical-rl;text-align: center;"><%= age %></td>
+          <% end %>
+        </tr>
+        <% if @mode == 'show_liunian_shishen' %>
+          <tr>
+            <% eval("#{@mode}(@user)")[:liunian_shishen_zhi][3].reverse.each do |mode| %>
+              <td scope="col" class="<%= @mode %>" style="text-align: center;"><%= mode %></td>
+            <% end %>
+          </tr>
+          <tr>
+            <% @user.dayun[4].chars.reverse.each do |dayun| %>
+              <td scope="col" colspan="5" class="show_liunian_dayun" style="text-align: center;"><%= dayun %></td>
+            <% end %>
+          </tr>
+        <% end %>
+        <tr clsee="table-active">
           <% liunian_age(@user)[4].reverse.each do |age| %>
             <td scope="col" class="age"><%= age %></td>
           <% end %>
         </tr>
         <tr>
-          <% show_liunian_age(@user)[4].reverse.each do |age| %>
-            <td scope="col" style="writing-mode: vertical-rl;text-align: center;"><%= age %></td>
+          <% eval("#{@year}(@user)")[4].reverse.each do |xi_yuan| %>
+            <td scope="col" class="<%= @year %>" style="text-align: center;"><%= xi_yuan %></td>
           <% end %>
         </tr>
         <tr>
+          <% show_liunian(@user)[4].reverse.each do |age| %>
+            <td scope="col" class="liunian" style="writing-mode: vertical-rl;text-align: center;"><%= age %></td>
+          <% end %>
+        </tr>
+        <% if @mode == 'show_liunian_shishen' %>
+          <tr>
+            <% eval("#{@mode}(@user)")[:liunian_shishen_zhi][4].reverse.each do |mode| %>
+              <td scope="col" class="<%= @mode %>" style="text-align: center;"><%= mode %></td>
+            <% end %>
+          </tr>
+          <tr>
+            <% @user.dayun[5].chars.reverse.each do |dayun| %>
+              <td scope="col" colspan="5" class="show_liunian_dayun" style="text-align: center;"><%= dayun %></td>
+            <% end %>
+          </tr>
+        <% end %>
+        <tr clsee="table-active">
           <% liunian_age(@user)[5].reverse.each do |age| %>
             <td scope="col" class="age"><%= age %></td>
           <% end %>
         </tr>
         <tr>
-          <% show_liunian_age(@user)[5].reverse.each do |age| %>
-            <td scope="col" style="writing-mode: vertical-rl;text-align: center;"><%= age %></td>
+          <% eval("#{@year}(@user)")[5].reverse.each do |xi_yuan| %>
+            <td scope="col" class="<%= @year %>" style="text-align: center;"><%= xi_yuan %></td>
           <% end %>
         </tr>
+        <tr>
+          <% show_liunian(@user)[5].reverse.each do |age| %>
+            <td scope="col" class="liunian" style="writing-mode: vertical-rl;text-align: center;"><%= age %></td>
+          <% end %>
+        </tr>
+        <% if @mode == 'show_liunian_shishen' %>
+          <tr>
+            <% eval("#{@mode}(@user)")[:liunian_shishen_zhi][5].reverse.each do |mode| %>
+              <td scope="col" class="<%= @mode %>" style="text-align: center;"><%= mode %></td>
+            <% end %>
+          </tr>
+          <tr>
+            <% @user.dayun[6].chars.reverse.each do |dayun| %>
+              <td scope="col" colspan="5" class="show_liunian_dayun" style="text-align: center;"><%= dayun %></td>
+            <% end %>
+          </tr>
+        <% end %>
       </tbody>
     </table>
-    <table class="table table-bordered text-center" id="dayun">
+    <table class="table table-bordered text-center" id="dayun-table">
       <tbody>
         <tr>
           <% dayun_age(@user.qiyun)[:dayun_age_gan].reverse.each do |age| %>
-            <td scope="col"><%= age %></td>
+            <td class="dayun_age" scope="col"><%= age %></td>
           <% end %>
         </tr>
         <tr>
           <% show_dayun_shishen(@user.dayun, @user.day_gan)[:dayun_shishen_gan].reverse.each do |shishen_gan| %>
-            <td scope="col"><%= shishen_gan %></td>
+            <td class="dayun_shishen" scope="col"><%= shishen_gan %></td>
           <% end %>
         </tr>
         <tr>
           <% show_dayun(@user.dayun)[:dayun_gan].each_with_index.reverse_each do |gan, index| %>
-            <td scope="col" class="dayun-gan dayun_gan_<%= index %>"><%= gan %></td>
+            <td class="dayun" scope="col" class="dayun-gan dayun_gan_<%= index %>"><%= gan %></td>
           <% end %>
         </tr>
         <tr>
           <% show_dayun(@user.dayun)[:dayun_zhi].each_with_index.reverse_each do |zhi, index| %>
-            <td scope="col" class="dayun-zhi dayun_zhi_<%= index %>"><%= zhi %></td>
+            <td class="dayun" scope="col" class="dayun-zhi dayun_zhi_<%= index %>"><%= zhi %></td>
           <% end %>
         </tr>
         <tr>
           <% show_dayun_shishen(@user.dayun, @user.day_gan)[:dayun_shishen_zhi].reverse.each do |shishen_zhi| %>
-            <td scope="col"><%= shishen_zhi %></td>
+            <td class="dayun_shishen" scope="col"><%= shishen_zhi %></td>
           <% end %>
         </tr>
         <tr>
           <% dayun_age(@user.qiyun)[:dayun_age_zhi].reverse.each do |age| %>
-            <td scope="col"><%= age %></td>
+            <td class="dayun_age" scope="col"><%= age %></td>
           <% end %>
         </tr>
       </table>
@@ -224,21 +347,100 @@
   </div>
     <div class="field" id="information-form">
       <%= form_for @user, method: 'put' do |form| %>
-        <%= form.label :qiangruo, '強弱' %>
-        <%= form.text_field :qiangruo %>
-        <%= form.label :xishen, '喜神' %>
-        <%= form.text_field :xishen %>
-        <%= form.label :jishen, '忌神' %>
-        <%= form.text_field :jishen %>
-        <%= form.label :xianshen, '閒神' %>
-        <%= form.text_field :xianshen %>
-        <%= form.label :notes %>
-        <%= form.rich_text_area :notes %>
+        <div>
+          <%= form.label :name, "姓名:" %>
+          <%= form.text_field :name %>
+        </div>
+        <div>
+          <%= form.label :name, "年:" %>
+          <%= form.text_field :year %>
+        </div>
+        <div>
+          <%= form.label :name, "月:" %>
+          <%= form.text_field :month %>
+        </div>
+        <div>
+          <%= form.label :name, "日:" %>
+          <%= form.text_field :day %>
+        </div>
+        <div>
+          <%= form.label :name, "時:" %>
+          <%= form.text_field :hour %>
+        </div>
+        <div>
+          <%= form.label :name, "分:" %>
+          <%= form.text_field :minute %>
+        </div>
+        <div>
+          <%= form.label :qiangruo, '強弱' %>
+          <%= form.text_field :qiangruo %>
+        </div>
+        <div>
+          <%= form.label :xishen, '喜神' %>
+          <%= form.text_field :xishen %>
+        </div>
+        <div>
+          <%= form.label :jishen, '忌神' %>
+          <%= form.text_field :jishen %>
+        </div>
+        <div>
+          <%= form.label :xianshen, '閒神' %>
+          <%= form.text_field :xianshen %>
+        </div>
+        <div>
+          <%= form.label :notes %>
+          <%= form.rich_text_area :notes %>
+        </div>
         <%= form.submit "送出", class: 'submit-btn' %>
       <% end %>
     </div>
+    <div class="fixed-top">
+      <div class="mt-2">
+        <%= link_to "回列表", users_path, class:'btn btn-outline-primary' %>
+      </div>
+      <div class="mt-2">
+        <%= link_to "民國紀年", user_path(@user, mode: params[:mode], year: "min_guo"), class:'btn btn-primary' %>
+        <%= link_to "西元紀年", user_path(@user, mode: params[:mode], year: "xi_yuan"), class:'btn btn-primary' %>
+      </div>
+      <div class="mt-2">
+        <%= link_to "流年模式", user_path(@user, mode: 'show_liunian_shishen', year: params[:year]), class:'btn btn-primary' %>
+        <%= link_to "一般模式", user_path(@user, mode: '0', year: "xi_yuan"), class:'btn btn-primary' %>
+      </div>
+      <p class="mt-2">
+        <a class="btn btn-primary" data-toggle="collapse" href="#key_considerations" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">刑沖會合</a>
+      </p>
+      <div class="row">
+        <div class="col-sm-2">
+          <div class="collapse multi-collapse" id="key_considerations">
+            <div class="card card-body">
+              <h6>需注意之天干剋合</h6>
+                <p>合：<%= @user.key_gan[:he].join("，") %></p>
+                <p>剋：<%= @user.key_gan[:ke].join("，") %></p>
+              <h6>需注意之地支刑沖會合</h6>
+                <p>合：<%= @user.key_zhi[:he].join("，") %></p>
+                <p>沖：<%= @user.key_zhi[:chong].join("，") %></p>
+                <p>三會：<%= @user.key_zhi[:sanhui].join("，") %></p>
+                <p>三合：<%= @user.key_zhi[:sanhe].join("，") %></p>
+                <p>相刑：<%= @user.key_zhi[:xing].join("，") %></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <script>
+      // $(document).ready(function() {
+      //   if ($('.all_key_gan_zhi').length > 0) {
+      //     var all_keys = $('.all_key_gan_zhi').val().split('');
+      //     console.log(all_keys)
+      //     $.each(all_keys, function(index, value) {
+      //       console.log(value)
+      //       console.log($(`td:contains(${value})`))
+      //       $(`td:contains("${value}")`).css("color", "red");
+      //     });
+      //   }
+      // });
+      
     </script>
   </body>
 </html>

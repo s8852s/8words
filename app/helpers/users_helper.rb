@@ -135,23 +135,36 @@ module UsersHelper
     first_age_arr.each_slice((first_age_arr.size / 6.to_f).ceil).to_a
   end
 
-  def show_liunian_age(user)
+  def show_liunian(user)
     user.liunian.each_slice((user.liunian.size / 6.to_f).ceil).to_a
   end
 
-  def show_liunian_xi_yuan(user)
+  def liunian_xi_yuan(user)
     user.liunian_year[:liunian_xi_yuan].each_slice((user.liunian_year[:liunian_xi_yuan].size / 6.to_f).ceil).to_a
-    # { liunian_xi_yuan: liunian_xi_yuan, liunian_min_guo: liunian_min_guo }
   end
 
-  def show_liunian_min_guo(user)
+  def liunian_min_guo(user)
     user.liunian_year[:liunian_min_guo].each_slice((user.liunian_year[:liunian_min_guo].size / 6.to_f).ceil).to_a
   end
 
-  def show_liunian
-  end
+  def show_liunian_shishen(user)
+    liunian_arr = user.liunian.join('').split('')
 
-  def show_liunian_shishen
+    liunian_gan = []
+    liunian_zhi = []
+
+    liunian_arr.each_with_index do |element, index|
+      if index.odd?
+        liunian_zhi << element
+      else
+        liunian_gan << element
+      end
+    end
+
+    {
+      liunian_shishen_gan: liunian_gan.map { |gan| translate_shishen(user.day_gan, gan) }.each_slice((liunian_gan.size / 6.to_f).ceil).to_a,
+      liunian_shishen_zhi: liunian_zhi.map { |zhi| translate_shishen(user.day_gan, zhi) }.each_slice((liunian_zhi.size / 6.to_f).ceil).to_a
+    }
   end
 
   def get_chinese_year(year)

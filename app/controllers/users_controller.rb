@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   def index
-    @users = User.all
+    @users = User.order(:id)
   end
 
   def new
@@ -16,6 +16,8 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @year = params[:year] == 'min_guo' ? "liunian_min_guo" : "liunian_xi_yuan"
+    @mode = params[:mode].presence || '0'
   end
 
   def update

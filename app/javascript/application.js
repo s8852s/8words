@@ -8,3 +8,10 @@ import './add_jquery'
 import './generate_8words'
 import "trix"
 import "@rails/actiontext"
+import jquery from "jquery"
+window.$ = jquery
+window.jQuery = jquery
+
+$(document).ready(function() {
+  console.log(111)
+});

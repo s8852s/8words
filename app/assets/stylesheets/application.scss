@@ -115,17 +115,18 @@
   flex-direction: row;
 }
 
-#mingpan {
+#mingpan-table {
   order: 2;
   flex-basis: 40%;
 }
 
-#dayun {
+#dayun-table {
   order: 3;
   flex-basis: 60%;
+  height:100%
 }
 
-#liunian {
+#liunian-table {
   order: 1;
   flex-basis: 58%;
   margin-left: 5px
@@ -157,7 +158,43 @@
   color: black;
 }
 
+.dayun_age, .dayun_shishen{
+  line-height: 10px;
+  height: 10px;
+}
+.dayun_age {
+  color: #4F4F4F	;
+  background-color: #E0E0E0;
+}
+
+.dayun{
+  line-height: 20px;
+  height: 20px;
+  font-size: 25px;
+}
+
 .age {
   color: #4F4F4F	;
+  background-color: #E0E0E0;
   border:1.3px solid black;
+  line-height: 0.3;
+}
+
+.liunian_xi_yuan, .liunian_min_guo {
+  line-height: 0.3;
+  border:black;
+}
+
+.show_liunian_shishen, .show_liunian_dayun {
+  line-height: 10px;
+  height: 10px;
+}
+
+.liunian_shishen_gan {
+  background-color: #D8D8EB;
+}
+
+.liunian {
+  background-color: #C4E1E1	;
+  border: black;
 }

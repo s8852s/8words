@@ -51,6 +51,10 @@ class User < ApplicationRecord
     this_year - user_birth_year
   end
 
+  def gan 
+    [year_gan, month_gan, day_gan, time_gan]
+  end
+
   def zhi
     [year_zhi, month_zhi, day_zhi, time_zhi]
   end
@@ -69,6 +73,44 @@ class User < ApplicationRecord
     end
     { gan: dayun_gan, zhi: dayun_zhi }
   end
+
+  def key_gan
+    he = gan.product(GAN_XIANGHE).map { |gan, xianghe| xianghe if xianghe.include?(gan) }.compact.uniq
+    ke = gan.product(GAN_XIANGKE).map { |gan, xianghe| xianghe if xianghe.include?(gan) }.compact.uniq
+
+    { he: he, ke: ke }
+  end
+
+  def key_zhi
+    he = zhi.product(ZHI_XIANGHE).map { |zhi, xianghe| xianghe if xianghe.include?(zhi) }.compact.uniq
+    chong = zhi.product(ZHI_XIANGCHONG).map { |zhi, xiangchong| xiangchong if xiangchong.include?(zhi) }.compact.uniq
+    sanhui = zhi.product(ZHI_SANHUI).map { |zhi, sanhui| sanhui if sanhui.include?(zhi) }.compact.uniq
+    sanhe = zhi.product(ZHI_SANHE).map { |zhi, sanhe| sanhe if sanhe.include?(zhi) }.compact.uniq
+    xing = zhi.product(ZHI_XIANGXING).map { |zhi, xing| xing if xing.include?(zhi) }.compact.uniq
+
+    { he: he,
+      chong: chong,
+      sanhui: sanhui,
+      sanhe: sanhe,
+      xing: xing
+     }
+  end
+
+  # def all_key_gan_zhi
+  #   user_keys = gan + zhi
+  #   all_keys = GAN_XIANGHE + GAN_XIANGKE + ZHI_XIANGHE + ZHI_XIANGCHONG + ZHI_SANHUI + ZHI_SANHE + ZHI_XIANGXING
+  #   result = user_keys.product(all_keys).map do |u_key, keys|
+  #     # byebug
+  #     matched = keys if keys.include?(u_key)
+  #     if matched.present? && matched.chars.uniq.length != 1
+  #       matched.gsub(u_key, '')
+  #     elsif matched.present? && matched.chars.uniq.length == 1
+  #       matched.chars.uniq.join("")
+  #     end
+  #   end.compact.uniq.join("")
+
+  #   result.chars.uniq.join("")
+  # end
 
   # private
 
@@ -97,7 +139,7 @@ class User < ApplicationRecord
   end
 
   def liunian_year
-    liunian_first_year = liunian_first_age + translate_birthday[:year] -1
+    liunian_first_year = liunian_first_age + translate_birthday[:year] - 1
     liunian_xi_yuan = (liunian_first_year..liunian_first_year + 59).to_a
     liunian_min_guo = (liunian_first_year..liunian_first_year + 59).to_a.map{ |year| year - 1911 }
     { liunian_xi_yuan: liunian_xi_yuan, liunian_min_guo: liunian_min_guo }
