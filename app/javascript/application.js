@@ -13,5 +13,4 @@ window.$ = jquery
 window.jQuery = jquery
 
 $(document).ready(function() {
-  console.log(111)
 });

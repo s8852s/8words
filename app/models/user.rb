@@ -51,7 +51,7 @@ class User < ApplicationRecord
     this_year - user_birth_year
   end
 
-  def gan 
+  def gan
     [year_gan, month_gan, day_gan, time_gan]
   end
 
@@ -93,7 +93,7 @@ class User < ApplicationRecord
       sanhui: sanhui,
       sanhe: sanhe,
       xing: xing
-     }
+    }
   end
 
   # def all_key_gan_zhi
@@ -141,7 +141,7 @@ class User < ApplicationRecord
   def liunian_year
     liunian_first_year = liunian_first_age + translate_birthday[:year] - 1
     liunian_xi_yuan = (liunian_first_year..liunian_first_year + 59).to_a
-    liunian_min_guo = (liunian_first_year..liunian_first_year + 59).to_a.map{ |year| year - 1911 }
+    liunian_min_guo = (liunian_first_year..liunian_first_year + 59).to_a.map { |year| year - 1911 }
     { liunian_xi_yuan: liunian_xi_yuan, liunian_min_guo: liunian_min_guo }
   end
 
@@ -305,90 +305,9 @@ class User < ApplicationRecord
     }
   end
 
-  def dayun_zhi_relationship # 本命盤與大運的地支刑衝剋合 不含三合三會
-    user_zhi = [year_zhi, month_zhi, day_zhi, time_zhi]
-    user_dayun_zhi = dayun_gan_zhi[:zhi]
-
-    # 地支相合(六合)的判斷
-    dayun_zhi_xianghe_position = []
-    ZHI_XIANGHE.each_with_index do |he_zhi, he_index|
-      arr = he_zhi.chars
-      dayun_zhi_xianghe_position << [user_zhi.index(arr[0]), user_dayun_zhi.index(arr[1]), ZHI_XIANGHE_WUXING[he_index]]
-    end
-
-    dayun_zhi_xianghe_position = dayun_zhi_xianghe_position.select { |sub_arr| sub_arr.compact.size == 2 }
-
-    # 地支相衝的判斷
-    dayun_zhi_xiangchong_position = []
-    ZHI_XIANGCHONG.each do |ch_zhi|
-      arr = ch_zhi.chars
-      dayun_zhi_xianghe_position << [user_zhi.index(arr[0]), user_dayun_zhi.index(arr[1])]
-    end
-
-    dayun_zhi_xiangchong_position = dayun_zhi_xiangchong_position.select { |sub_arr| sub_arr.compact.size == 2 }
-
-    # 地支三會的判斷
-    # ZHI_SANHUI = %w[寅卯辰 巳午未 申酉戌 亥子丑].freeze # 地支三會
-    # ZHI_SANHUI_WUXING = %w[木 火 金 水].freeze # 地支三會五行
-    # user_zhi =User.second.zhi
-    # user_dayun_zhi =  User.second.dayun_gan_zhi[:zhi]
-    # hash =  %w[亥卯未 巳酉丑 寅午戌 申子辰]
-    # user_zhi.combination(2).to_a.each do |u_zhi|
-    # user_zhi.each do |u_zhi|
-    mached_2_user_zhi = []
-    hash.map.with_index do |d_zhi, d_zhi_index| 
-      mached = user_zhi - d_zhi.chars
-      if mached.length == 2
-        mached_2_user_zhi << ([0,1,2,3] - [user_zhi.index(mached[0]), user_zhi.index(mached[1])]) + [d_zhi_index]
-      end
-    end
-    mached_2_user_zhi.map do |u_z_i_arr|
-      user_dayun_zhi.each_with_index do |u_d_z, u_d_z_i|
-        mached2 = [user_zhi[u_z_i_arr[0]], user_zhi[u_z_i_arr[1]]]
-        mached3 = mached2 + [u_d_z]
-        hash.each_with_index do |c_zhi, c_index|
-          if mached3 - c_zhi.chars == []
-            u_z_i_arr.delete_at(2) 
-            u_z_i_arr << u_d_z_i
-          end
-        end
-      end
-    end
-
-
-
-    # 地支三合的判斷
-
-    # 地支相刑的判斷
-    dayun_zhi_xiangxing_position = []
-    User::ZHI_XIANGXING.each_with_index do |xing_zhi, xing_index|
-      arr = xing_zhi.chars
-      dayun_zhi_xiangxing_position << [user_zhi.index(arr[0]), user_dayun_zhi.index(arr[1]), User::ZHI_XIANGXING_NOTES[xing_index]]
-      dayun_zhi_xiangxing_position << [user_zhi.index(arr[1]), user_dayun_zhi.index(arr[0]), User::ZHI_XIANGXING_NOTES[xing_index]]
-    end
-
-    dayun_zhi_xiangxing_position = dayun_zhi_xiangxing_position.select { |sub_arr| sub_arr.compact.size == 3 }
-
-    {
-      dayun_zhi_xianghe: dayun_zhi_xianghe_position,
-      dayun_zhi_xiangchong: dayun_zhi_xiangchong_position,
-      # dayun_zhi_sanhui: dayun_zhi_sanhui_position,
-      # dayun_zhi_sanhe: dayun_zhi_sanhe_position,
-      dayun_zhi_xiangxing: dayun_zhi_xiangxing_position
-    }
-  end
-
   def update_relationship
     user_gan = [year_gan, day_gan, time_gan]
     user_zhi = [year_zhi, day_zhi, time_zhi]
-    # t.string :year_gan
-    # t.string :year_zhi
-    # t.string :month_gan
-    # t.string :month_zhi
-    # t.string :day_gan
-    # t.string :day_zhi
-    # t.string :time_gan
-    # t.string :time_zhi
   end
 
   def dayun_zhi_sanhe_sanhui # 本命與大運地支的三合三會
@@ -400,43 +319,5 @@ class User < ApplicationRecord
     a.combination(2).each do |pair|
       c << [a.index(pair[0]), a.index(pair[1])] if pair.all? { |elem| b.include?(elem) }
     end
-
-
-
-
-
-    # ### 三合
-    # sanhe_mached_2_user_zhi_index = []
-    # ZHI_SANHE.map.with_index do |d_zhi, c_zhi_index|
-    #   mached = user_zhi - d_zhi.chars
-    #   if mached.length == 2
-    #     sanhe_mached_2_user_zhi_index << ([*0..3] - [user_zhi.index(mached[0]), user_zhi.index(mached[1])]) + [c_zhi_index]
-    #   end
-    # end
-    # # sanhe_mached_2_user_zhi_index 0,1元素為user_zhi經過比較後有同時符合2個字的index
-    # sanhe_mached_2_user_zhi_index.map do |ma_arr|
-    #   target = ZHI_SANHE[ma_arr[2]].chars - [user_zhi[ma_arr[0]], user_zhi[ma_arr[1]]]
-    #   ma_arr.delete_at(2)
-    #   ma_arr << user_dayun_zhi.index(target[0]) if user_dayun_zhi.index(target[0]).present?
-    # end
-
-    # ### 三會
-    # sanhui_mached_2_user_zhi_index = []
-    # ZHI_SANHUI.map.with_index do |d_zhi, c_zhi_index|
-    #   mached = user_zhi - d_zhi.chars
-    #   if mached.length == 2
-    #     sanhui_mached_2_user_zhi_index << ([*0..3] - [user_zhi.index(mached[0]), user_zhi.index(mached[1])]) + [c_zhi_index]
-    #   end
-    # end
-    # # sanhe_mached_2_user_zhi_index 0,1元素為user_zhi經過比較後有同時符合2個字的index
-    # sanhui_mached_2_user_zhi_index.map do |ma_arr|
-    #   target = ZHI_SANHUI[ma_arr[2]].chars - [user_zhi[ma_arr[0]], user_zhi[ma_arr[1]]]
-    #   ma_arr.delete_at(2)
-    #   ma_arr << user_dayun_zhi.index(target[0]) if user_dayun_zhi.index(target[0]).present?
-    # end
-
-    # { dayun_zhi_sanhe: sanhe_mached_2_user_zhi_index,
-    #   dayun_zhi_sanhui: sanhui_mached_2_user_zhi_index 
-    # }
   end
 end
