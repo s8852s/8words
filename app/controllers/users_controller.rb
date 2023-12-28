@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    params[:user][:xunkong ]= params[:user][:xunkong].to_s
+    params[:user][:xunkong ] = params[:user][:xunkong].to_s
     params[:user][:gender] = params[:user][:gender].to_i
     @user = User.new(params.require(:user).permit!)
     redirect_to users_path if @user.save

@@ -176,4 +176,14 @@ module UsersHelper
 
     "#{tian_gan[tian_gan_index]}#{di_zhi[di_zhi_index]}"
   end
+
+  def show_yinyang(user)
+    user_gan = [user.year_gan, user.month_gan, user.day_gan, user.time_gan]
+    user_zhi = [user.year_zhi, user.month_zhi, user.day_zhi, user.time_zhi]
+    user_gan_index = user_gan.map { |gan| User::GAN.index(gan) }
+    user_gan_yinyang = user_gan_index.map { |i| User::GAN_YINYANG[i] }
+    user_zhi_index = user_zhi.map { |zhi| User::ZHI.index(zhi) }
+    user_zhi_yinyang = user_zhi_index.map { |i| User::ZHI_YINYANG[i] }
+    (user_gan_yinyang + user_zhi_yinyang).join
+  end
 end
