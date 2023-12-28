@@ -341,6 +341,7 @@
       <div>喜神：<%= @user.xishen %></div>
       <div>忌神：<%= @user.jishen %></div>
       <div>閒神：<%= @user.xianshen %></div>
+      <div>起運：<%= @user.qiyun %></div>
       <div>備註：<%= @user.notes&.html_safe %></div>
     </div>
 
@@ -350,26 +351,6 @@
         <div>
           <%= form.label :name, "姓名:" %>
           <%= form.text_field :name %>
-        </div>
-        <div>
-          <%= form.label :name, "年:" %>
-          <%= form.text_field :year %>
-        </div>
-        <div>
-          <%= form.label :name, "月:" %>
-          <%= form.text_field :month %>
-        </div>
-        <div>
-          <%= form.label :name, "日:" %>
-          <%= form.text_field :day %>
-        </div>
-        <div>
-          <%= form.label :name, "時:" %>
-          <%= form.text_field :hour %>
-        </div>
-        <div>
-          <%= form.label :name, "分:" %>
-          <%= form.text_field :minute %>
         </div>
         <div>
           <%= form.label :qiangruo, '強弱' %>
@@ -386,6 +367,10 @@
         <div>
           <%= form.label :xianshen, '閒神' %>
           <%= form.text_field :xianshen %>
+        </div>
+        <div>
+          <%= form.label :feature, '八字特色' %>
+          <%= form.text_field :feature %>
         </div>
         <div>
           <%= form.label :notes %>
@@ -413,6 +398,8 @@
         <div class="col-sm-2">
           <div class="collapse multi-collapse" id="key_considerations">
             <div class="card card-body">
+              <h6>干支陰陽</h6>
+                <p><%= show_yinyang(@user) %></p>
               <h6>需注意之天干剋合</h6>
                 <p>合：<%= @user.key_gan[:he].join("，") %></p>
                 <p>剋：<%= @user.key_gan[:ke].join("，") %></p>

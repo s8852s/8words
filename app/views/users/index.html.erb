@@ -5,16 +5,20 @@
       <th scope="col"></th>
       <th scope="col">姓名</th>
       <th scope="col">性別</th>
+      <th scope="col">強弱</th>
       <th scope="col">生日</th>
+      <th scope="col">八字特色</th>
     </tr>
   </thead>
   <tbody>
 <% @users.each do |user| %>
     <tr>
-      <th scope="row">1</th>
+      <th scope="row"><%= user.id %></th>
       <td><%= link_to user.name, user_path(user.id) %></td>
       <td><%= user.gender %></td>
-      <td><%= user.solar_birthday.strftime("%F %H:%M") %></td>
+      <td><%= user.qiangruo %></td>
+      <td><%= user.solar_birthday&.strftime("%F %H:%M") %></td>
+      <td><%= user.feature %></td>
       <td><%= link_to "刪除", user_path(user.id), data: {confirm: '確定要刪除嗎？'}, method: :delete %></td>
     </tr>
 <% end %>
