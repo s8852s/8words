@@ -8,6 +8,8 @@ class UsersController < ApplicationController
   end
 
   def create
+    params[:user][:solar_birthday] = params[:user][:solar_birthday].gsub(/--+/, "-")
+    params[:user][:lunar_birthday] = params[:user][:lunar_birthday].gsub(/--+/, "-")
     params[:user][:xunkong ] = params[:user][:xunkong].to_s
     params[:user][:gender] = params[:user][:gender].to_i
     @user = User.new(params.require(:user).permit!)

@@ -116,11 +116,6 @@
     <table class="table table-bordered border-dark text-center align-middle" id="liunian-table" >
       <tbody>
         <% if @mode == 'show_liunian_shishen' %>
-          <tr>
-            <% @user.dayun[0].chars.reverse.each do |dayun| %>
-              <td scope="col" colspan="5" class="show_liunian_dayun" style="text-align: center;"><%= dayun %></td>
-            <% end %>
-          </tr>
         <% end %>
         <tr clsee="table-active">
           <% liunian_age(@user)[0].reverse.each do |age| %>
@@ -140,13 +135,7 @@
           </tr>
         <% end %>
 
-        <% if @mode == 'show_liunian_shishen' %>
-          <tr>
-            <% eval("#{@mode}(@user)")[:liunian_shishen_zhi][1].reverse.each do |mode| %>
-              <td scope="col" class="<%= @mode %>" style="text-align: center;"><%= mode %></td>
-            <% end %>
-          </tr>
-        <% end %>
+
         <tr>
           <% show_liunian(@user)[0].reverse.each do |age| %>
             <td scope="col" class="liunian" style="writing-mode: vertical-rl;text-align: center;"><%= age %></td>
@@ -158,11 +147,7 @@
               <td scope="col" class="<%= @mode %>" style="text-align: center;"><%= mode %></td>
             <% end %>
           </tr>
-          <tr>
-            <% @user.dayun[1].chars.reverse.each do |dayun| %>
-              <td scope="col" colspan="5" class="show_liunian_dayun" style="text-align: center;"><%= dayun %></td>
-            <% end %>
-          </tr>
+
         <% end %>
         <tr clsee="table-active">
           <% liunian_age(@user)[1].reverse.each do |age| %>
@@ -183,11 +168,6 @@
           <tr>
             <% eval("#{@mode}(@user)")[:liunian_shishen_zhi][1].reverse.each do |mode| %>
               <td scope="col" class="<%= @mode %>" style="text-align: center;"><%= mode %></td>
-            <% end %>
-          </tr>
-          <tr>
-            <% @user.dayun[2].chars.reverse.each do |dayun| %>
-              <td scope="col" colspan="5" class="show_liunian_dayun" style="text-align: center;"><%= dayun %></td>
             <% end %>
           </tr>
         <% end %>
@@ -212,11 +192,6 @@
               <td scope="col" class="<%= @mode %>" style="text-align: center;"><%= mode %></td>
             <% end %>
           </tr>
-          <tr>
-            <% @user.dayun[3].chars.reverse.each do |dayun| %>
-              <td scope="col" colspan="5" class="show_liunian_dayun" style="text-align: center;"><%= dayun %></td>
-            <% end %>
-          </tr>
         <% end %>
         <tr clsee="table-active">
           <% liunian_age(@user)[3].reverse.each do |age| %>
@@ -237,11 +212,6 @@
           <tr>
             <% eval("#{@mode}(@user)")[:liunian_shishen_zhi][3].reverse.each do |mode| %>
               <td scope="col" class="<%= @mode %>" style="text-align: center;"><%= mode %></td>
-            <% end %>
-          </tr>
-          <tr>
-            <% @user.dayun[4].chars.reverse.each do |dayun| %>
-              <td scope="col" colspan="5" class="show_liunian_dayun" style="text-align: center;"><%= dayun %></td>
             <% end %>
           </tr>
         <% end %>
@@ -266,11 +236,6 @@
               <td scope="col" class="<%= @mode %>" style="text-align: center;"><%= mode %></td>
             <% end %>
           </tr>
-          <tr>
-            <% @user.dayun[5].chars.reverse.each do |dayun| %>
-              <td scope="col" colspan="5" class="show_liunian_dayun" style="text-align: center;"><%= dayun %></td>
-            <% end %>
-          </tr>
         <% end %>
         <tr clsee="table-active">
           <% liunian_age(@user)[5].reverse.each do |age| %>
@@ -291,11 +256,6 @@
           <tr>
             <% eval("#{@mode}(@user)")[:liunian_shishen_zhi][5].reverse.each do |mode| %>
               <td scope="col" class="<%= @mode %>" style="text-align: center;"><%= mode %></td>
-            <% end %>
-          </tr>
-          <tr>
-            <% @user.dayun[6].chars.reverse.each do |dayun| %>
-              <td scope="col" colspan="5" class="show_liunian_dayun" style="text-align: center;"><%= dayun %></td>
             <% end %>
           </tr>
         <% end %>

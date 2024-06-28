@@ -133,13 +133,14 @@ class User < ApplicationRecord
   end
 
   def update_liunian_first_age
-    qiyun_age = qiyun.split(',').first.to_i
-    first_age = current_age < 60 ? qiyun_age + 1 : qiyun_age + 11
-    update_columns(liunian_first_age: first_age)
+    # qiyun_age = qiyun.split(',').first.to_i
+    # first_age = current_age < 60 ? qiyun_age + 1 : qiyun_age + 11
+    # update_columns(liunian_first_age: first_age)
+    update_columns(liunian_first_age: 1)
   end
 
   def liunian_year
-    liunian_first_year = liunian_first_age + translate_birthday[:year] - 1
+    liunian_first_year = translate_birthday[:year] 
     liunian_xi_yuan = (liunian_first_year..liunian_first_year + 59).to_a
     liunian_min_guo = (liunian_first_year..liunian_first_year + 59).to_a.map { |year| year - 1911 }
     { liunian_xi_yuan: liunian_xi_yuan, liunian_min_guo: liunian_min_guo }
@@ -147,7 +148,7 @@ class User < ApplicationRecord
 
   def update_liunian
     update_liunian_first_age
-    liunian_first_year = liunian_first_age + translate_birthday[:year] -1
+    liunian_first_year = translate_birthday[:year] 
     liunian_year_arr = (liunian_first_year..liunian_first_year+59).to_a
 
     liunian_year = [] # 干支紀年
